@@ -1,0 +1,37 @@
+@page "{Category?}"
+@model Aspnet.FrontEnd.UI.Pages.Products.IndexModel
+
+@{
+    ViewData["Title"] = "Product Category";
+}
+@using Aspnet.FrontEnd.UI.Models;
+
+<h2 class="productCategory">Product Category</h2>
+
+<div class="filter">
+    <a asp-page="Index" asp-route-Category="Bikes">Bikes</a>
+    <a asp-page="Index" asp-route-Category="Components">Components</a>
+    <a asp-page="Index" asp-route-Category="Clothing">Clothing</a>
+    <a asp-page="Index" asp-route-Category="Accessories">Accessories</a>
+</div>
+
+<div>
+    <table class="index">
+        <thead>
+            <th width="100">Id</th>
+            <th width="300">Category</th>
+            <th width="500">SubCategory</th>
+            <th width="200">Products</th>
+        </thead>
+
+        @foreach (var pc in Model.ProductCategories)
+        {
+            <tr>
+                <td><a asp-page="Catalog" asp-route-Id="@pc.ProductCategoryID">@pc.ProductCategoryID</a></td>
+                <td>@pc.Category</td>
+                <td>@pc.SubCategory</td>
+                <td><a asp-page="Catalog" asp-route-Id="@pc.ProductCategoryID">@pc.ProductCount</a></td>
+            </tr>
+        }
+    </table>
+</div>
