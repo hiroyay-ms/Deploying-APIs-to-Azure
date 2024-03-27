@@ -3,6 +3,10 @@ name: Build and deploy ASP.Net Core Web App to Azure App Service
 on:
   workflow_dispatch:
     inputs:
+      ENVIRONMENT:
+        description: 'Environment'
+        required: true
+        default: 'Production'
       AZURE_WEBAPP_NAME:
         description: 'WebApp Name'
         required: true
@@ -39,8 +43,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    environment:
-      name: 'Production'
+    environment: ${{ github.event.inputs.ENVIRONMENT }}
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     
     steps:
