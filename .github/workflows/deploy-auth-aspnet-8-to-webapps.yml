@@ -1,18 +1,19 @@
 name: Build and deploy ASP.Net Core Web App to Azure App Service
 
+env:
+  APP_PATH: './src/API_Authentication/Web'
+
 on:
   workflow_dispatch:
     inputs:
       ENVIRONMENT:
         description: 'Environment'
         required: true
-        default: 'Production'
+        type: string
       AZURE_WEBAPP_NAME:
         description: 'WebApp Name'
         required: true
-
-env:
-  APP_PATH: './src/API_Authentication/Web'
+        type: string
 
 jobs:
   build:
