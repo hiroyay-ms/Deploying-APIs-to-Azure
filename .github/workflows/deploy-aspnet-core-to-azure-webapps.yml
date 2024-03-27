@@ -11,6 +11,10 @@ on:
         description: 'Azure Web App Name'
         required: true
         type: string
+      ENVIRONMENT:
+        description: 'Environment'
+        required: true
+        type: string
 
 permissions:
   contents: read
