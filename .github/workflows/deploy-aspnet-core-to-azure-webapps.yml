@@ -1,7 +1,6 @@
 name: Build and deploy ASP.Net Core app to an Azure Web App
 
 env:
-  APP_PATH: './src/CS/Web'
   DOTNET_VERSION: '8.x'
 
 on:
@@ -13,6 +12,10 @@ on:
         type: string
       ENVIRONMENT:
         description: 'Environment'
+        required: true
+        type: string
+      APP_PATH:
+        description: 'Path to the app'
         required: true
         type: string
 
@@ -33,16 +36,16 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        run: dotnet build ${{ env.APP_PATH }} --configuration Release
+        run: dotnet build ${{ github.event.inputs.APP_PATH }} --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish ${{ env.APP_PATH }} -c Release -o ${{env.APP_PATH}}/myapp
+        run: dotnet publish ${{ github.event.inputs.APP_PATH }} -c Release -o ${{ github.event.inputs.APP_PATH }}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: .net-app
-          path: ${{ env.APP_PATH }}/myapp
+          path: ${{ github.event.inputs.APP_PATH }}/myapp
 
   deploy:
     permissions:
