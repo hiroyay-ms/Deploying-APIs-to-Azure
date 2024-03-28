@@ -3,6 +3,20 @@
 @{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<div class="text-center">
+    <h1 class="display-4">Request Header Inspector</h1>
+
+    <div>
+        <p>
+            <b>X-MS-TOKEN-AAD-ID-TOKEN</b>
+            <br />
+            @Request.Headers["X-MS-TOKEN-AAD-ID-TOKEN"]
+        </p>
+        <p>
+            <b>X-MS-TOKEN-AAD-ACCESS-TOKEN</b>
+            <br />
+            @Request.Headers["X-MS-TOKEN-AAD-ACCESS-TOKEN"]
+        </p>
+    </div>
+</div>
