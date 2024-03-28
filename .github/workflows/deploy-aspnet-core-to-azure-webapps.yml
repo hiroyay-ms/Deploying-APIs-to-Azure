@@ -14,10 +14,6 @@ on:
         description: 'Environment'
         required: true
         type: string
-      APP_PATH:
-        description: 'Path to the app'
-        required: true
-        type: string
 
 permissions:
   contents: read
@@ -36,16 +32,16 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        run: dotnet build ${{ github.event.inputs.APP_PATH }} --configuration Release
+        run: dotnet build ${{ vars.APP_PATH }} --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish ${{ github.event.inputs.APP_PATH }} -c Release -o ${{ github.event.inputs.APP_PATH }}/myapp
+        run: dotnet publish ${{ vars.APP_PATH }} -c Release -o ${{ vars.APP_PATH }}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: .net-app
-          path: ${{ github.event.inputs.APP_PATH }}/myapp
+          path: ${{ vars.APP_PATH }}/myapp
 
   deploy:
     permissions:
