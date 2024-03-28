@@ -16,6 +16,10 @@ public class PrivacyModel : PageModel
 
     public void OnGet()
     {
+        if (!this.HttpContext.Request.Headers.ContainsKey("X-MS-TOKEN-AAD-ACCESS-TOKEN"))
+        {
+            ViewData["Message"] = "Access token not found";
+        }
     }
 }
 
