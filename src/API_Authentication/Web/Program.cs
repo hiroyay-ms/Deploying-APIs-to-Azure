@@ -10,15 +10,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
+//builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+//    .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
 
-builder.Services.AddAuthorization(options =>
-{
-    options.FallbackPolicy = options.DefaultPolicy;
-});
-builder.Services.AddRazorPages()
-    .AddMicrosoftIdentityUI();
+//builder.Services.AddAuthorization(options =>
+//{
+//    options.FallbackPolicy = options.DefaultPolicy;
+//});
+//builder.Services.AddRazorPages()
+//    .AddMicrosoftIdentityUI();
 
 var app = builder.Build();
 
@@ -35,11 +35,11 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication();
+//app.UseAuthentication();
 
 app.UseAuthorization();
 
 app.MapRazorPages();
-app.MapControllers();
+//app.MapControllers();
 
 app.Run();
