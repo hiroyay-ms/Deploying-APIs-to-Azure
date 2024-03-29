@@ -7,18 +7,15 @@ using Microsoft.Identity.Web.UI;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+    .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
 
-// builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-//    .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
-
-// builder.Services.AddAuthorization(options =>
-// {
-//    options.FallbackPolicy = options.DefaultPolicy;
-// });
-// builder.Services.AddRazorPages()
-//    .AddMicrosoftIdentityUI();
+builder.Services.AddAuthorization(options =>
+{
+   options.FallbackPolicy = options.DefaultPolicy;
+});
+builder.Services.AddRazorPages()
+   .AddMicrosoftIdentityUI();
 
 var app = builder.Build();
 
